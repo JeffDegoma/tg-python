@@ -1,0 +1,20 @@
+kind: pipeline
+type: docker
+name: default
+
+  
+steps:
+  - name: publish to ecr
+    image: plugins/ecr
+    settings:
+      repo:
+        from_secret: ecr_repo
+      region: us-east-1
+      tags:
+        - latest
+        - "1.0.0"
+      create_repository: true
+      access_key:
+        from_secret: aws_access_key_id
+      secret_key:
+        from_secret: aws_secret_access_key
